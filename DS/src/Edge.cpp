@@ -4,7 +4,7 @@
 Edge::Edge(int id1, int id2, int distance) :
     id1(id1), id2(id2), distance(distance){}
 
-std::string Edge::to_string() {
+std::string Edge::to_string() const{
     std::stringstream ss;
 
     ss << id1 << " <-------> " << id2 << '\n';
@@ -12,7 +12,7 @@ std::string Edge::to_string() {
     return ss.str();
 }
 
-std::tuple<int, int, int> Edge::get_info() {
+std::tuple<int, int, int> Edge::get_info() const {
     auto edge_info = std::make_tuple(id1, id2, distance);
     return edge_info;
 }

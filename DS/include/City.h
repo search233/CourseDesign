@@ -1,3 +1,6 @@
+#ifndef CITY_H
+#define CITY_H
+
 #include <string>
 #include <tuple>
 
@@ -13,13 +16,13 @@ private :
     std::string brief; 
 public : 
     City(); 
-    City(int id, std::string&& name, int x, int y, std::string&& brief); 
+    City(int id, std::string& name, int x, int y, std::string& brief); 
     
     void set_info(int id, std::string&& name, int x, int y, std::string&& brief); 
     
-    std::string to_string(); 
+    std::string to_string() const; 
 
-    std::tuple<int, std::string, int, int, std::string> get_info();
+    std::tuple<int, std::string, int, int, std::string> get_info() const;
 
 }; 
 /* city 包含： 
@@ -31,3 +34,4 @@ public :
         用两个 int 类型变量存储 x, y 坐标 
     简介 用 string 存储 
 */
+#endif

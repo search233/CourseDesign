@@ -3,7 +3,7 @@
 
 // 构造 
 City::City() : id(-1), name(""), x(0), y(0), brief(""){} 
-City::City(int id, std::string&& name, int x, int y, std::string&& brief) : 
+City::City(int id, std::string& name, int x, int y, std::string& brief) : 
     id(id), name(name), x(x), y(y), brief(brief) {} 
     
 // 修改数据 
@@ -15,13 +15,13 @@ void City::set_info(int id, std::string&& name, int x, int y, std::string&& brie
     this -> brief = brief; 
 } 
 
-std::tuple<int, std::string, int, int, std::string> City::get_info() {
+std::tuple<int, std::string, int, int, std::string> City::get_info() const {
     auto city_info = make_tuple(id, name, x, y, brief);
     return city_info;
 }
 
 // 把信息转换为字符串便于打印 
-std::string City::to_string() {     
+std::string City::to_string() const{     
     std::stringstream ss; 
 
     ss << "编号 : " << id << "\n" 
@@ -31,3 +31,14 @@ std::string City::to_string() {
     
     return ss.str(); 
 }
+ 
+/*
+    Graph 包含
+        存储城市的顺序表
+            vector<City> city_list
+        用于表示图的邻接表
+            vector<vector<City>> edge_list
+        用于映射城市编号和表中编号的哈希表
+            unordered_map<int, int> 
+            表中编号 ----> 城市编号
+*/
