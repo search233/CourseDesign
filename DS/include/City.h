@@ -1,4 +1,6 @@
-#include <string> 
+#include <string>
+#include <tuple>
+
 class City { 
 private : 
     // 编号 
@@ -16,6 +18,9 @@ public :
     void set_info(int id, std::string&& name, int x, int y, std::string&& brief); 
     
     std::string to_string(); 
+
+    std::tuple<int, std::string, int, int, std::string> get_info();
+
 }; 
 /* city 包含： 
     编号 

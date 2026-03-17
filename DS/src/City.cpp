@@ -15,6 +15,11 @@ void City::set_info(int id, std::string&& name, int x, int y, std::string&& brie
     this -> brief = brief; 
 } 
 
+std::tuple<int, std::string, int, int, std::string> City::get_info() {
+    auto city_info = make_tuple(id, name, x, y, brief);
+    return city_info;
+}
+
 // 把信息转换为字符串便于打印 
 std::string City::to_string() {     
     std::stringstream ss; 
