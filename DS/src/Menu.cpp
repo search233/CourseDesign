@@ -63,10 +63,12 @@ void Menu::choose_op(int op) {
 }
 
 void Menu::add_city() {
-    int id = graph.city_cnt();
-
-    std::string name, desc;
+    std::string name, brief;
     int x, y;
+
+    int id;
+    std::cout << "输入城市编号: ";
+    std::cin >> id;
 
     std::cout << "输入城市名称: ";
     std::cin >> name;
@@ -76,9 +78,9 @@ void Menu::add_city() {
 
     std::cin.ignore();
     std::cout << "输入描述: ";
-    getline(std::cin, desc);
+    getline(std::cin, brief);
 
-    if (graph.add_city({id, name, x, y, desc})) {
+    if (graph.add_city({id, name, x, y, brief})) {
         std::cout << "添加成功, ID = " << id << std::endl;
     }
     else {
@@ -86,7 +88,7 @@ void Menu::add_city() {
         char choice;
         std::cin >> choice;
         if (choice == 'Y' || choice == 'y') {
-                City newCity(id, name, x, y, desc);
+                City newCity(id, name, x, y, brief);
                 graph.add_city(newCity);
                 std::cout << "覆盖成功, ID = " << id << std::endl;
         } else {

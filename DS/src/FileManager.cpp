@@ -83,7 +83,8 @@ bool FileManager::save_edges(const std::string& filename, const Graph& graph) {
 
             if (u > v) continue;
             // 读取的时候建双边 存储的时候去重
-
+            u = std::get<0>(graph.get_city(u).get_info());
+            v = std::get<0>(graph.get_city(v).get_info());
             ofs << "|" << u << "|" << v << "|\n";
         }
 
