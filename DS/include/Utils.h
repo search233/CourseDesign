@@ -1,3 +1,6 @@
+#ifndef UTILS_H
+#define UTILS_H
+
 #include <string>
 #include <vector>
 #include "City.h"
@@ -13,3 +16,5 @@ namespace Utils {
     std::string trimCR(const std::string& s);
 
 }
+#endif
+

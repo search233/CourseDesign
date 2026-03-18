@@ -1,3 +1,6 @@
+#ifndef FILEMANAGER_H
+#define FILEMANAGER_H
+
 #include "Graph.h"
 #include <string>
 
@@ -9,3 +12,5 @@ public :
     static bool save_cities(const std::string& filename, const Graph& graph);
     static bool save_edges(const std::string& filename, const Graph& graph);
 };
+
+#endif

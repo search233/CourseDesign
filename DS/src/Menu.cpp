@@ -104,6 +104,30 @@ void Menu::add_edge() {
     }
 }
 
+void Menu::remove_city() {
+    int id;
+    std::cout << "输入要删除的城市ID: ";
+    std::cin >> id;
+
+    if (graph.remove_city(id)) {
+        std::cout << "删除成功\n";
+    } else {
+        std::cout << "删除失败，城市不存在\n";
+    }
+}
+
+void Menu::remove_edge() {
+    int u, v;
+    std::cout << "输入要删除线路的两个城市ID: ";
+    std::cin >> u >> v;
+
+    if (graph.remove_edge(u, v)) {
+        std::cout << "删除成功\n";
+    } else {
+        std::cout << "删除失败，城市不存在或线路不存在\n";
+    }
+}
+
 void Menu::show_cites() {
     int n = graph.city_cnt();
     for (int i = 0; i < n; ++i) {
