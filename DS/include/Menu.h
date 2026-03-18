@@ -8,6 +8,7 @@
 class Menu {
 private :
     int run_tag;
+    bool modified_;
     Graph graph;
 
     void show_menu();
