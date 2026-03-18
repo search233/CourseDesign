@@ -59,7 +59,40 @@ public :
     static std::vector<std::tuple<City, int>> cal_path_dist(int s, const Graph& graph);
 
 
-    // TODO 问题7 (旅行商问题)
+    // 问题7 (旅行商问题)
+    /*
+        使用近似算法解决，城市数量 n <= 200
+        1. 先用 Floyd-Warshall 计算所有点对最短距离
+        2. 最近邻算法：从起点出发，每次选择最近的未访问城市
+        3. 适用于路径问题（不回到起点）和回路问题（回到起点）
+    */
+    struct TSP {
+        int n;
+        std::vector<std::vector<int>> dist;  // 所有点对最短距离
+        std::vector<std::vector<int>> next;  // 路径记录，用于还原完整路径
+        
+        TSP(const Graph& graph);
+        
+        // Floyd-Warshall 计算所有点对最短距离
+        void floyd_warshall(const Graph& graph);
+        
+        // 最近邻算法求解 TSP 路径（不回到起点）
+        // 返回 {最短距离, 访问顺序}
+        std::pair<int, std::vector<int>> nearest_neighbor_path(int start);
+        
+        // 最近邻算法求解 TSP 回路（回到起点）
+        // 返回 {最短距离, 访问顺序}
+        std::pair<int, std::vector<int>> nearest_neighbor_cycle(int start);
+        
+        // 获取两个城市之间的最短路径上的下一个城市（用于还原完整路径）
+        int get_next_city(int u, int v) const;
+    };
+    
+    // 从某一城市出发经过所有城市（城市可重复）且距离最短的路线（不回到起点）
+    static std::pair<int, std::vector<int>> tsp_shortest_path(int start, const Graph& graph);
+    
+    // 从某一城市出发经过所有城市（城市可重复）并回到源点的最短路线
+    static std::pair<int, std::vector<int>> tsp_shortest_cycle(int start, const Graph& graph);
 
     // 最小树问题  
     /*
