@@ -27,7 +27,9 @@ private :
     void is_connected();
     // 问题6
     void show_dis();
-    // TODO 问题7
+
+    // TSP问题接口
+    void show_tsp_path();
 
     // 问题8
     void show_kru_path();

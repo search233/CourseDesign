@@ -40,7 +40,7 @@ void Menu::show_menu() {
     std::cout << "7. 判断连通性\n";
     std::cout << "8. 最短路径查询\n";
     std::cout << "9. 构建最小生成树\n";
-    // TODO std::cout << "10. TSP 路径\n";
+    std::cout << "10. TSP 路径\n";
     std::cout << "0. 退出\n";
 }
 
@@ -55,7 +55,7 @@ void Menu::choose_op(int op) {
         case 7: is_connected(); break;
         case 8: show_dis(); break;
         case 9: show_kru_path(); break;
-        // TODO case 10: 
+        case 10: show_tsp_path(); break;
         case 0: shut_down(); break;
         default:
             std::cout << "无效选项" << std::endl;
@@ -217,3 +217,17 @@ void Menu::show_kru_path() {
     }
 }
 
+void Menu::show_tsp_path() {
+    std::cout << "输入起始城市：";
+    int s;
+    std::cin >> s;
+
+    auto [dist, path] = GAlgo::tsp_shortest_path(s, graph);
+    std::cout << "最短路径距离 = " << dist << std::endl;
+    std::cout << "访问顺序：";
+    for (int idx : path) {
+        int cid = std::get<0>(graph.get_city(idx).get_info());
+        std::cout << cid << ' ';
+    }
+    std::cout << std::endl;
+}
