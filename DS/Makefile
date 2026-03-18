@@ -9,9 +9,10 @@ TARGET = main
 
 # 源文件
 SRC = $(wildcard src/*.cpp)
+MAIN = main.cpp
 
 # 目标文件（.cpp → .o）
-OBJ = $(patsubst src/%.cpp, build/%.o, $(SRC))
+OBJ = $(patsubst src/%.cpp, build/%.o, $(SRC)) build/main.o
 
 # 默认目标
 all: $(TARGET)
@@ -22,6 +23,11 @@ $(TARGET): $(OBJ)
 
 # 编译规则（核心）
 build/%.o: src/%.cpp
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# 编译 main.cpp
+build/main.o: main.cpp
 	@mkdir -p build
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 

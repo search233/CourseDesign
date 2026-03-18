@@ -175,7 +175,7 @@ void Menu::is_connected() {
             int uid = std::get<0>(graph.get_city(u).get_info());
             int vid = std::get<0>(graph.get_city(v).get_info());
 
-            std::cout << u << " <----> " << v << '\n';
+            std::cout << uid << " <----> " << vid << '\n';
         }
     }
 }
@@ -208,7 +208,7 @@ void Menu::show_kru_path() {
         int uid = std::get<0>(graph.get_city(u).get_info());
         int vid = std::get<0>(graph.get_city(v).get_info());
 
-        std::cout << u << " <----> " << v << '\n';
+        std::cout << uid << " <----> " << vid << '\n';
     }
 }
 
