@@ -2,10 +2,13 @@
 #include "FileManager.h"
 #include <iostream>
 
+const std::string city_file = "~/Projects/CourseDesign/DS/data/cities.txt";
+const std::string edge_file = "~/Projects/CourseDesign/DS/data/edges.txt";
+
 Menu::Menu() {
     run_tag = 1;
-    FileManager::load_cities("../data/cities.txt", graph);
-    FileManager::load_edges("../data/edges.txt", graph);
+    FileManager::load_cities(city_file, graph);
+    FileManager::load_edges(edge_file, graph);
 }
 
 void Menu::run() {
@@ -22,8 +25,8 @@ void Menu::run() {
 
 void Menu::shut_down() {
     run_tag = 0;
-    FileManager::save_cities("../data/cities.txt", graph);
-    FileManager::save_edges("../data/edges.txt", graph);
+    FileManager::save_cities(city_file, graph);
+    FileManager::save_edges(edge_file, graph);
 }
 
 void Menu::show_menu() {
