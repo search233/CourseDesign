@@ -155,3 +155,143 @@ std::vector<Edge> GAlgo::MST(const Graph& graph) {
     kruskal kru(n, edges);
     return kru.run();
 }
+
+// ==================== TSP 实现 ====================
+
+GAlgo::TSP::TSP(const Graph& graph) {
+    n = graph.city_cnt();
+    floyd_warshall(graph);
+}
+
+void GAlgo::TSP::floyd_warshall(const Graph& graph) {
+    const int INF = 1e9;
+    
+    // 初始化距离矩阵和路径矩阵
+    dist.assign(n, std::vector<int>(n, INF));
+    next.assign(n, std::vector<int>(n, -1));
+    
+    for (int i = 0; i < n; ++i) {
+        dist[i][i] = 0;
+        next[i][i] = i;
+    }
+    
+    // 从图中读取直接相连的边
+    for (int u = 0; u < n; ++u) {
+        auto edges = graph.get_edges(u);
+        for (const auto& e : edges) {
+            auto [from, v, w] = e.get_info();
+            if (w < dist[u][v]) {
+                dist[u][v] = w;
+                next[u][v] = v;
+            }
+        }
+    }
+    
+    // Floyd-Warshall 算法
+    for (int k = 0; k < n; ++k) {
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (dist[i][k] + dist[k][j] < dist[i][j]) {
+                    dist[i][j] = dist[i][k] + dist[k][j];
+                    next[i][j] = next[i][k];
+                }
+            }
+        }
+    }
+}
+
+int GAlgo::TSP::get_next_city(int u, int v) const {
+    return next[u][v];
+}
+
+std::pair<int, std::vector<int>> GAlgo::TSP::nearest_neighbor_path(int start) {
+    const int INF = 1e9;
+    std::vector<bool> visited(n, false);
+    std::vector<int> path;
+    int total_dist = 0;
+    int current = start;
+    int visited_count = 0;
+    
+    visited[current] = true;
+    path.push_back(current);
+    visited_count++;
+    
+    while (visited_count < n) {
+        int next_city = -1;
+        int min_dist = INF;
+        
+        // 找到最近的未访问城市
+        for (int i = 0; i < n; ++i) {
+            if (!visited[i] && dist[current][i] < min_dist) {
+                min_dist = dist[current][i];
+                next_city = i;
+            }
+        }
+        
+        if (next_city == -1) {
+            // 无法到达更多城市（图不连通）
+            break;
+        }
+        
+        total_dist += min_dist;
+        current = next_city;
+        visited[current] = true;
+        path.push_back(current);
+        visited_count++;
+    }
+    
+    return {total_dist, path};
+}
+
+std::pair<int, std::vector<int>> GAlgo::TSP::nearest_neighbor_cycle(int start) {
+    const int INF = 1e9;
+    std::vector<bool> visited(n, false);
+    std::vector<int> path;
+    int total_dist = 0;
+    int current = start;
+    int visited_count = 0;
+    
+    visited[current] = true;
+    path.push_back(current);
+    visited_count++;
+    
+    while (visited_count < n) {
+        int next_city = -1;
+        int min_dist = INF;
+        
+        // 找到最近的未访问城市
+        for (int i = 0; i < n; ++i) {
+            if (!visited[i] && dist[current][i] < min_dist) {
+                min_dist = dist[current][i];
+                next_city = i;
+            }
+        }
+        
+        if (next_city == -1) {
+            // 无法到达更多城市（图不连通）
+            break;
+        }
+        
+        total_dist += min_dist;
+        current = next_city;
+        visited[current] = true;
+        path.push_back(current);
+        visited_count++;
+    }
+    
+    // 回到起点形成回路
+    total_dist += dist[current][start];
+    path.push_back(start);
+    
+    return {total_dist, path};
+}
+
+std::pair<int, std::vector<int>> GAlgo::tsp_shortest_path(int start, const Graph& graph) {
+    TSP tsp(graph);
+    return tsp.nearest_neighbor_path(start);
+}
+
+std::pair<int, std::vector<int>> GAlgo::tsp_shortest_cycle(int start, const Graph& graph) {
+    TSP tsp(graph);
+    return tsp.nearest_neighbor_cycle(start);
+}
