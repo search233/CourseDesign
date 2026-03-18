@@ -1,5 +1,6 @@
 #include "GAlgo.h"
 #include "Utils.h"
+#include <set>
 
 void GAlgo::DSU::init(int n) {
     this->n = n;
@@ -102,7 +103,7 @@ bool GAlgo::kruskal::check() {
     return dsu.size(0) == dsu.n;
 }
 
-bool GAlgo::is_connected(const Graph& graph) {
+std::vector<Edge> GAlgo::grab_edges(const Graph& graph) {
     int n = graph.city_cnt();
     std::vector<Edge> edges;
 
@@ -116,11 +117,56 @@ bool GAlgo::is_connected(const Graph& graph) {
         }
     }
 
+    return edges;
+}
+ 
+
+std::vector<Edge> GAlgo::is_connected(const Graph& graph) {
+    static const std::vector<Edge> Empty;
+    int n = graph.city_cnt(); 
+    DSU dsu;
+
+    dsu.init(n);
+    std::vector<Edge> edges = grab_edges(graph);
+    for (auto e : edges) {
+        auto [u, v, w] = e.get_info();
+        dsu.merge(u, v);
+    }
+
+    std::set<int> st;
+    for (int i = 0; i < n; ++i) {
+        st.insert(dsu.find(i));
+    }
+
+    if (st.size() == 1) {
+        return Empty;
+    }
+
+    edges.clear();
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = i + 1; j < n; ++j) {
+            if (dsu.same(i, j)) continue;
+            City a =  graph.get_city(i);
+            City b =  graph.get_city(j);
+            Edge e(i, j, Utils::cal_Dis(a, b));
+            edges.push_back(e);
+        }
+    }
+
+    sort(edges.begin(), edges.end(),
+        [](const Edge& a, const Edge& b) {
+            return std::get<2>(a.get_info()) < std::get<2>(b.get_info());
+        });
+
     kruskal kru(n, edges);
-    return kru.check();
+    return kru.run();
 }
 
-std::vector<std::tuple<City, int>> GAlgo::cal_path_dist(int s, const Graph& graph) {
+
+std::vector<std::tuple<City, int>> 
+    GAlgo::cal_path_dist(int s, const Graph& graph) {
+ 
     Dijkstra dij(graph);
     dij.run(s);
     int n = graph.city_cnt();
@@ -131,7 +177,8 @@ std::vector<std::tuple<City, int>> GAlgo::cal_path_dist(int s, const Graph& grap
     }
 
     std::sort(res.begin(), res.end(), 
-        [&](const std::tuple<City, int>& a, const std::tuple<City, int>& b) {
+        [&](const std::tuple<City, int>& a, 
+            const std::tuple<City, int>& b) {                
             return std::get<1>(a) < std::get<1>(b);
         });
 
@@ -143,7 +190,7 @@ std::vector<Edge> GAlgo::MST(const Graph& graph) {
     std::vector<Edge> edges;
 
     for (int i = 0; i < n; ++i) {
-        for (int j = i; j < n; ++j) {
+        for (int j = i + 1; j < n; ++j) {
             City a = graph.get_city(i);
             City b = graph.get_city(j);
             int dis = Utils::cal_Dis(a, b);

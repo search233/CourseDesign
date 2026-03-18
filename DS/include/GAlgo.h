@@ -48,9 +48,14 @@ private :
         bool check();
     };
 
-
+    static std::vector<Edge> grab_edges(const Graph& graph);
 public :
-    static bool is_connected(const Graph& graph);
+
+    // 返回完全联通需要加上的和最小的边
+    // 完全联通返回空
+    static std::vector<Edge> is_connected(const Graph& graph);
+ 
+    // 按照距离从小到大返回一个城市列表
     static std::vector<std::tuple<City, int>> cal_path_dist(int s, const Graph& graph);
 
 

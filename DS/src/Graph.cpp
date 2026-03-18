@@ -14,18 +14,17 @@ bool Graph::add_city(const City& city) {
     return true;
 }
 
-bool Graph::add_edge(const Edge& edge) {
-    auto [id1, id2, dis] = edge.get_info();
+bool Graph::add_edge(int id1, int id2) {
 
     if (!mp.count(id1) || !mp.count(id2)) {
         return false;
     }
+
     int u = mp[id1];
     int v = mp[id2];
-    
+    int dis = Utils::cal_Dis(city_list[u], city_list[v]);
     edge_list[u].push_back(Edge(u, v, dis));
     edge_list[v].push_back(Edge(v, u, dis));
-
     return true;
 }
 

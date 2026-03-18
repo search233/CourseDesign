@@ -3,6 +3,7 @@
 
 #include "City.h"
 #include "Edge.h"
+#include "Utils.h"
 #include <vector>
 #include <unordered_map>
 
@@ -13,7 +14,7 @@ private :
     std::vector<std::vector<Edge>> edge_list;
 
 public :
-    bool add_edge(const Edge& edge);
+    bool add_edge(int id1, int id2);
     bool add_city(const City& city);
 
     bool remove_edge(int id1, int id2);
@@ -35,4 +36,4 @@ public :
             unordered_map<int, int> 
             城市编号 -----> 内部编号
 */
-#endif
+#endif;

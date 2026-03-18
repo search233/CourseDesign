@@ -45,9 +45,7 @@ bool FileManager::load_edges(const std::string& filename, Graph& graph) {
         City b = graph.get_city(id2);
         // TODO 检查 city a/b 是否存在
 
-        int dis = Utils::cal_Dis(a, b);
-        Edge edge(id1, id2, dis);
-        graph.add_edge(edge);
+        graph.add_edge(id1, id2);
     }
     return true;
 }
