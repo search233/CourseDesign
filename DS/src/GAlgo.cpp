@@ -172,8 +172,9 @@ std::vector<std::tuple<City, int>>
     int n = graph.city_cnt();
 
     std::vector<std::tuple<City, int>> res;
+    res.reserve(n);
     for (int i = 0; i < n; ++i) {
-        res[i] = std::make_tuple(graph.get_city(i), dij.dist[i]);
+        res.emplace_back(graph.get_city(i), dij.dist[i]);
     }
 
     std::sort(res.begin(), res.end(), 
