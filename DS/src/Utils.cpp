@@ -13,14 +13,14 @@ int Utils::cal_Dis(const City& a, const City& b) {
 
 std::vector<std::string> Utils::split(const std::string& s, char delim) {
     std::vector<std::string> res;
-    std::string cur;
+    std::string cur = "";
 
     for (auto c : s) {
         if (c == delim && !cur.empty()) {
             res.push_back(cur);
-            cur.clear();
+            cur = "";
         }
-        else {
+        else if (c != delim){
             cur.push_back(c);
         }
     }

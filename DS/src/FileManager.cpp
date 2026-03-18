@@ -15,11 +15,11 @@ bool FileManager::load_cities(const std::string& filename, Graph& graph) {
         auto info = Utils::split(line, '|');
         if (info.empty()) continue;
 
-        int id = stoi(info[1]);
-        std::string name = info[2];
-        int x = stoi(info[3]);
-        int y = stoi(info[4]);
-        std::string brief = info[5];
+        int id = stoi(info[0]);
+        std::string name = info[1];
+        int x = stoi(info[2]);
+        int y = stoi(info[3]);
+        std::string brief = info[4];
         City city(id, name, x, y, brief);
 
         graph.add_city(city);
@@ -38,8 +38,8 @@ bool FileManager::load_edges(const std::string& filename, Graph& graph) {
         auto info = Utils::split(line, '|');
         if (info.empty()) continue;
 
-        int id1 = stoi(info[1]);
-        int id2 = stoi(info[2]);
+        int id1 = stoi(info[0]);
+        int id2 = stoi(info[1]);
 
         City a = graph.get_city(id1);
         City b = graph.get_city(id2);
