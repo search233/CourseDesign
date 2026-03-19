@@ -2,8 +2,8 @@
 #include "FileManager.h"
 #include <iostream>
 
-const std::string city_file = "/home/yangz/Projects/CourseDesign/DS/data/cities.txt";
-const std::string edge_file = "/home/yangz/Projects/CourseDesign/DS/data/edges.txt";
+const std::string city_file = "data/cities.txt";
+const std::string edge_file = "data/edges.txt";
 
 Menu::Menu() {
     run_tag = 1;
