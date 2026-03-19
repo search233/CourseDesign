@@ -7,6 +7,7 @@ const std::string edge_file = "data/edges.txt";
 
 Menu::Menu() {
     run_tag = 1;
+    modified_ = false;
     FileManager::load_cities(city_file, graph);
     FileManager::load_edges(edge_file, graph);
 }
@@ -25,8 +26,10 @@ void Menu::run() {
 
 void Menu::shut_down() {
     run_tag = 0;
-    FileManager::save_cities(city_file, graph);
-    FileManager::save_edges(edge_file, graph);
+    if (modified_) {
+        FileManager::save_cities(city_file, graph);
+        FileManager::save_edges(edge_file, graph);
+    }
 }
 
 void Menu::show_menu() {
@@ -40,7 +43,7 @@ void Menu::show_menu() {
     std::cout << "7. 判断连通性\n";
     std::cout << "8. 最短路径查询\n";
     std::cout << "9. 构建最小生成树\n";
-    // TODO std::cout << "10. TSP 路径\n";
+    std::cout << "10. TSP 路径\n";
     std::cout << "0. 退出\n";
 }
 
@@ -55,7 +58,7 @@ void Menu::choose_op(int op) {
         case 7: is_connected(); break;
         case 8: show_dis(); break;
         case 9: show_kru_path(); break;
-        // TODO case 10: 
+        case 10: show_tsp_path(); break;
         case 0: shut_down(); break;
         default:
             std::cout << "无效选项" << std::endl;
@@ -63,10 +66,12 @@ void Menu::choose_op(int op) {
 }
 
 void Menu::add_city() {
-    int id = graph.city_cnt();
-
-    std::string name, desc;
+    std::string name, brief;
     int x, y;
+
+    int id;
+    std::cout << "输入城市编号: ";
+    std::cin >> id;
 
     std::cout << "输入城市名称: ";
     std::cin >> name;
@@ -76,9 +81,10 @@ void Menu::add_city() {
 
     std::cin.ignore();
     std::cout << "输入描述: ";
-    getline(std::cin, desc);
+    getline(std::cin, brief);
 
-    if (graph.add_city({id, name, x, y, desc})) {
+    if (graph.add_city({id, name, x, y, brief})) {
+        modified_ = true;
         std::cout << "添加成功, ID = " << id << std::endl;
     }
     else {
@@ -86,8 +92,9 @@ void Menu::add_city() {
         char choice;
         std::cin >> choice;
         if (choice == 'Y' || choice == 'y') {
-                City newCity(id, name, x, y, desc);
+                City newCity(id, name, x, y, brief);
                 graph.add_city(newCity);
+                modified_ = true;
                 std::cout << "覆盖成功, ID = " << id << std::endl;
         } else {
             std::cout << "放弃覆盖" << std::endl;
@@ -101,6 +108,7 @@ void Menu::add_edge() {
     std::cin >> u >> v;
     
     if (graph.add_edge(u, v)) {
+        modified_ = true;
         std::cout << "添加成功\n";
     } else {
         std::cout << "添加失败\n";
@@ -113,6 +121,7 @@ void Menu::remove_city() {
     std::cin >> id;
 
     if (graph.remove_city(id)) {
+        modified_ = true;
         std::cout << "删除成功\n";
     } else {
         std::cout << "删除失败，城市不存在\n";
@@ -125,6 +134,7 @@ void Menu::remove_edge() {
     std::cin >> u >> v;
 
     if (graph.remove_edge(u, v)) {
+        modified_ = true;
         std::cout << "删除成功\n";
     } else {
         std::cout << "删除失败，城市不存在或线路不存在\n";
@@ -215,3 +225,17 @@ void Menu::show_kru_path() {
     }
 }
 
+void Menu::show_tsp_path() {
+    std::cout << "输入起始城市：";
+    int s;
+    std::cin >> s;
+
+    auto [dist, path] = GAlgo::tsp_shortest_path(s, graph);
+    std::cout << "最短路径距离 = " << dist << std::endl;
+    std::cout << "访问顺序：";
+    for (int idx : path) {
+        int cid = std::get<0>(graph.get_city(idx).get_info());
+        std::cout << cid << ' ';
+    }
+    std::cout << std::endl;
+}

@@ -66,6 +66,8 @@ public :
         2. 最近邻算法：从起点出发，每次选择最近的未访问城市
         3. 适用于路径问题（不回到起点）和回路问题（回到起点）
     */
+
+    
     struct TSP {
         int n;
         std::vector<std::vector<int>> dist;  // 所有点对最短距离
