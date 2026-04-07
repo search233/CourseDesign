@@ -166,7 +166,8 @@ std::vector<Edge> GAlgo::is_connected(const Graph& graph) {
 
 std::vector<std::tuple<City, int>> 
     GAlgo::cal_path_dist(int s, const Graph& graph) {
- 
+
+    s = graph.get_innerid(s);
     Dijkstra dij(graph);
     dij.run(s);
     int n = graph.city_cnt();
@@ -334,12 +335,14 @@ std::pair<int, std::vector<int>> GAlgo::TSP::nearest_neighbor_cycle(int start) {
     return {total_dist, path};
 }
 
-std::pair<int, std::vector<int>> GAlgo::tsp_shortest_path(int start, const Graph& graph) {
+std::pair<int, std::vector<int>> GAlgo::tsp_shortest_path(int s, const Graph& graph) {
     TSP tsp(graph);
-    return tsp.nearest_neighbor_path(start);
+    s = graph.get_innerid(s);
+    return tsp.nearest_neighbor_path(s);
 }
 
-std::pair<int, std::vector<int>> GAlgo::tsp_shortest_cycle(int start, const Graph& graph) {
+std::pair<int, std::vector<int>> GAlgo::tsp_shortest_cycle(int s, const Graph& graph) {
     TSP tsp(graph);
-    return tsp.nearest_neighbor_cycle(start);
+    s = graph.get_innerid(s);
+    return tsp.nearest_neighbor_cycle(s);
 }

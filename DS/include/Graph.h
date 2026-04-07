@@ -20,6 +20,7 @@ public :
     bool remove_edge(int id1, int id2);
     bool remove_city(int id);
 
+    int get_innerid(int id) const;
     const City& get_city(int inner_id) const;
     const std::vector<Edge>& get_edges(int inner_id) const;
 

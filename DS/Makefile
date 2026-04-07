@@ -2,7 +2,7 @@
 CXX = g++
 
 # 编译选项
-CXXFLAGS = -std=c++20 -Wall -Iinclude
+CXXFLAGS = -g -std=c++20 -Wall -Iinclude
 
 # 目标程序名
 TARGET = main

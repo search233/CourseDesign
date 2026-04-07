@@ -31,14 +31,3 @@ std::string City::to_string() const{
     
     return ss.str(); 
 }
- 
-/*
-    Graph 包含
-        存储城市的顺序表
-            vector<City> city_list
-        用于表示图的邻接表
-            vector<vector<City>> edge_list
-        用于映射城市编号和表中编号的哈希表
-            unordered_map<int, int> 
-            表中编号 ----> 城市编号
-*/
