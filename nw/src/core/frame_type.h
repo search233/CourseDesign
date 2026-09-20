@@ -107,6 +107,10 @@ struct Result {
     std::string error_message;
     EthernetFrame frame;
     std::vector<CrcSnapshot> crc_snaps;
+
+    bool is_ok() const { 
+        return status == ErrorCode::Success; 
+    }
 };
 
 }
