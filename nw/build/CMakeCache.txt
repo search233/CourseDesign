@@ -125,7 +125,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=Ethernet8023_TestRunner
+CMAKE_PROJECT_NAME:STATIC=Ethernet8023_Test
 
 //Value Computed by CMake
 CMAKE_PROJECT_SPDX_LICENSE:STATIC=
@@ -196,13 +196,13 @@ CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
-Ethernet8023_TestRunner_BINARY_DIR:STATIC=/home/yangz/Projects/CourseDesign/nw/build
+Ethernet8023_Test_BINARY_DIR:STATIC=/home/yangz/Projects/CourseDesign/nw/build
 
 //Value Computed by CMake
-Ethernet8023_TestRunner_IS_TOP_LEVEL:STATIC=ON
+Ethernet8023_Test_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
-Ethernet8023_TestRunner_SOURCE_DIR:STATIC=/home/yangz/Projects/CourseDesign/nw
+Ethernet8023_Test_SOURCE_DIR:STATIC=/home/yangz/Projects/CourseDesign/nw
 
 
 ########################

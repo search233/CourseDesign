@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/yangz/Projects/CourseDesign/nw/src
 
-CXX_FLAGS = -std=c++20 -Wall -Wextra
+CXX_FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
 
