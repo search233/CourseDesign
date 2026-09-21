@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/yangz/Projects/CourseDesign/nw/build",
+  "command": "/usr/bin/c++  -I/home/yangz/Projects/CourseDesign/nw/src -std=c++20 -Wall -Wextra -o CMakeFiles/EthernetCore.dir/src/core/frame_type.cc.o -c /home/yangz/Projects/CourseDesign/nw/src/core/frame_type.cc",
+  "file": "/home/yangz/Projects/CourseDesign/nw/src/core/frame_type.cc",
+  "output": "CMakeFiles/EthernetCore.dir/src/core/frame_type.cc.o"
+},
+{
+  "directory": "/home/yangz/Projects/CourseDesign/nw/build",
+  "command": "/usr/bin/c++  -I/home/yangz/Projects/CourseDesign/nw/src -std=c++20 -Wall -Wextra -o CMakeFiles/EthernetCore.dir/src/core/utils.cc.o -c /home/yangz/Projects/CourseDesign/nw/src/core/utils.cc",
+  "file": "/home/yangz/Projects/CourseDesign/nw/src/core/utils.cc",
+  "output": "CMakeFiles/EthernetCore.dir/src/core/utils.cc.o"
+},
+{
+  "directory": "/home/yangz/Projects/CourseDesign/nw/build",
+  "command": "/usr/bin/c++  -I/home/yangz/Projects/CourseDesign/nw/src -std=c++20 -Wall -Wextra -o CMakeFiles/EthernetCore.dir/src/core/crc_engine.cc.o -c /home/yangz/Projects/CourseDesign/nw/src/core/crc_engine.cc",
+  "file": "/home/yangz/Projects/CourseDesign/nw/src/core/crc_engine.cc",
+  "output": "CMakeFiles/EthernetCore.dir/src/core/crc_engine.cc.o"
+},
+{
+  "directory": "/home/yangz/Projects/CourseDesign/nw/build",
+  "command": "/usr/bin/c++  -I/home/yangz/Projects/CourseDesign/nw/src -std=c++20 -Wall -Wextra -o CMakeFiles/EthernetCore.dir/src/core/frame_builder.cc.o -c /home/yangz/Projects/CourseDesign/nw/src/core/frame_builder.cc",
+  "file": "/home/yangz/Projects/CourseDesign/nw/src/core/frame_builder.cc",
+  "output": "CMakeFiles/EthernetCore.dir/src/core/frame_builder.cc.o"
+},
+{
+  "directory": "/home/yangz/Projects/CourseDesign/nw/build",
+  "command": "/usr/bin/c++  -I/home/yangz/Projects/CourseDesign/nw/src -std=c++20 -Wall -Wextra -o CMakeFiles/test_runner.dir/test/test_runner.cc.o -c /home/yangz/Projects/CourseDesign/nw/test/test_runner.cc",
+  "file": "/home/yangz/Projects/CourseDesign/nw/test/test_runner.cc",
+  "output": "CMakeFiles/test_runner.dir/test/test_runner.cc.o"
+}
+]

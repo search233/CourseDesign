@@ -1,0 +1,4 @@
+/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/EthernetCore.dir
+/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/test_runner.dir
+/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/edit_cache.dir
+/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/rebuild_cache.dir

@@ -3,8 +3,8 @@
 #include <sstream>
 #include <iomanip>
 
-bool parse_mac (
-    const std::string& mac_str,
+bool utils::parse_mac (
+    std::string_view mac_str,
     std::array<uint8_t, 6>& mac) {
 
     bool tag = 1;
@@ -34,10 +34,17 @@ bool parse_mac (
         tag &= 0;
     }
 
-    return static_cast<bool>(tag);
+    if (tag == 0) return false;
+
+    for (int i = 0; i < 6; ++i) {
+        int tmpnum = std::stoi(clean_str.substr(2 * i, 2), nullptr, 16);
+        mac[i] = static_cast<uint8_t>(tmpnum);
+    }
+
+    return true;
 }
 
-std::string byte_to_hex (uint8_t byte) {
+std::string utils::byte_to_hex (uint8_t byte) {
     std::ostringstream oss;
 
     oss << std::hex 
@@ -50,7 +57,7 @@ std::string byte_to_hex (uint8_t byte) {
 }
 
 
-std::string mac_to_string (
+std::string utils::mac_to_string (
     const std::array<uint8_t, 6>& mac) {
             
     std::ostringstream oss;
@@ -62,11 +69,11 @@ std::string mac_to_string (
     return oss.str();
 }
 
-std::vector<uint8_t> ascii_to_bytes (const std::string& ascii_str) {
+std::vector<uint8_t> utils::ascii_to_bytes (std::string_view ascii_str) {
     return std::vector<uint8_t>(ascii_str.begin(), ascii_str.end());
 }
 
-std::string byte_to_bit_string (uint8_t byte) {
+std::string utils::byte_to_bit_string (uint8_t byte) {
     std::string bits;
     for (int i = 7; i >= 0; --i) {
         bits += ((byte >> i) & 1) ? '1' : '0';
@@ -74,7 +81,7 @@ std::string byte_to_bit_string (uint8_t byte) {
     return bits;
 }
 
-std::string uint16_to_bit_string(uint16_t value) {
+std::string utils::byte_to_bit_string(uint16_t value) {
     std::string bits;
     for (int i = 15; i >= 0; --i) {
         bits += ((value >> i) & 1) ? '1' : '0';
@@ -82,7 +89,7 @@ std::string uint16_to_bit_string(uint16_t value) {
     return bits;
 }
 
-std::string bytes_to_bit_string(const std::vector<uint8_t>& bytes) {
+std::string utils::bytes_to_bit_string(const std::vector<uint8_t>& bytes) {
     std::string bits;
     bits.reserve(bytes.size() * 8);
     for (uint8_t b : bytes) {

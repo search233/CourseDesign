@@ -1,0 +1,2 @@
+/usr/bin/ar qc libEthernetCore.a CMakeFiles/EthernetCore.dir/src/core/frame_type.cc.o CMakeFiles/EthernetCore.dir/src/core/utils.cc.o CMakeFiles/EthernetCore.dir/src/core/crc_engine.cc.o CMakeFiles/EthernetCore.dir/src/core/frame_builder.cc.o
+/usr/bin/ranlib libEthernetCore.a
