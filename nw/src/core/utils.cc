@@ -1,21 +1,13 @@
 #include "utils.h"
 #include <cassert>
 #include <sstream>
+#include <iomanip>
 
-ethernet::ErrorCode
-    utils::parse_mac (
-        const std::string& mac_str,
-        std::vector<uint8_t>& mac,
-        bool is_dest) {
+bool parse_mac (
+    const std::string& mac_str,
+    std::array<uint8_t, 6>& mac) {
 
-    // 0: success
-    // 1: invalid dest
-    // 2: invalid src
-    unsigned int tag = 0;
-    auto put_tag = [&]() -> void {
-        if (is_dest) tag = 1;
-        else tag = 2;
-    };
+    bool tag = 1;
 
     int len = mac_str.length();
     std::string clean_str;
@@ -25,13 +17,13 @@ ethernet::ErrorCode
         if (ch == '-' || ch == ':' || ch == ' ') {
             if ((i + 1) % 3 == 0) continue;
             else {
-                put_tag();
+                tag &= 0;
                 break;
             }
         }
 
         if (!std::isxdigit(static_cast<unsigned char>(ch))) {
-            put_tag();
+            tag &= 0;
             break;
         }
 
@@ -39,39 +31,62 @@ ethernet::ErrorCode
     }
 
     if (clean_str.length() != 12) {
-        put_tag();
+        tag &= 0;
     }
 
-    switch (tag) {
-        using err_code = ethernet::ErrorCode;
-        case 0: {
-            return err_code::Success;
-        }
-
-        case 1: {
-            return err_code::InvalidDestMac;
-        }
-
-        case 2: {
-            return err_code::InvalidSrcMac;
-        }
-
-        default: {
-            assert(tag <= 2);
-        }
-    }
-
-    return ethernet::ErrorCode::Success;
+    return static_cast<bool>(tag);
 }
 
-std::string utils::byte_to_hex (uint8_t byte) {
+std::string byte_to_hex (uint8_t byte) {
     std::ostringstream oss;
 
     oss << std::hex 
         << std::uppercase 
         << std::setfill('0') 
-        << std::setw(2) 
+        << std::setw(2)
         << static_cast<int>(byte);
 
     return oss.str();
+}
+
+
+std::string mac_to_string (
+    const std::array<uint8_t, 6>& mac) {
+            
+    std::ostringstream oss;
+
+    for (auto byte : mac) {
+        oss << utils::byte_to_hex(byte);
+    }
+
+    return oss.str();
+}
+
+std::vector<uint8_t> ascii_to_bytes (const std::string& ascii_str) {
+    return std::vector<uint8_t>(ascii_str.begin(), ascii_str.end());
+}
+
+std::string byte_to_bit_string (uint8_t byte) {
+    std::string bits;
+    for (int i = 7; i >= 0; --i) {
+        bits += ((byte >> i) & 1) ? '1' : '0';
+    }
+    return bits;
+}
+
+std::string uint16_to_bit_string(uint16_t value) {
+    std::string bits;
+    for (int i = 15; i >= 0; --i) {
+        bits += ((value >> i) & 1) ? '1' : '0';
+    }
+    return bits;
+}
+
+std::string bytes_to_bit_string(const std::vector<uint8_t>& bytes) {
+    std::string bits;
+    bits.reserve(bytes.size() * 8);
+    for (uint8_t b : bytes) {
+        bits += byte_to_bit_string(b);
+    }
+    return bits;
 }

@@ -46,7 +46,7 @@ struct CrcSnapshot {
     size_t index;
 
     // 当前处理的9位数字
-    std::string current_bits;
+    std::string current_window;
 
     // 当前步骤的结果
     bool is_xor;
@@ -114,4 +114,3 @@ struct Result {
 };
 
 }
-
