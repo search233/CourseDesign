@@ -1,10 +1,12 @@
 #include "utils.h"
+#include <cassert>
+#include <sstream>
 
 ethernet::ErrorCode
     utils::parse_mac (
         const std::string& mac_str,
         std::vector<uint8_t>& mac,
-        bool is_dest = true) {
+        bool is_dest) {
 
     // 0: success
     // 1: invalid dest
@@ -13,7 +15,7 @@ ethernet::ErrorCode
     auto put_tag = [&]() -> void {
         if (is_dest) tag = 1;
         else tag = 2;
-    }
+    };
 
     int len = mac_str.length();
     std::string clean_str;
@@ -22,7 +24,7 @@ ethernet::ErrorCode
 
         if (ch == '-' || ch == ':' || ch == ' ') {
             if ((i + 1) % 3 == 0) continue;
-            eles {
+            else {
                 put_tag();
                 break;
             }
@@ -58,6 +60,8 @@ ethernet::ErrorCode
             assert(tag <= 2);
         }
     }
+
+    return ethernet::ErrorCode::Success;
 }
 
 std::string utils::byte_to_hex (uint8_t byte) {
@@ -70,12 +74,4 @@ std::string utils::byte_to_hex (uint8_t byte) {
         << static_cast<int>(byte);
 
     return oss.str();
-}
-
-std::string 
-    utils::mac_to_string (const std::array<uint8_t, 8>& mac) {
-    std::ostringstream oss;
-
-    for (auto)
-
 }
