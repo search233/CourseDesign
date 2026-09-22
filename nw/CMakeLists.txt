@@ -43,3 +43,11 @@ add_executable(test_runner
 target_link_libraries(test_runner PRIVATE EthernetCore)
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test/test_cases.ini DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+add_custom_target(run
+    COMMAND ${CMAKE_CURRENT_BINARY_DIR}/ethernet_tui
+    DEPENDS ethernet_tui
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMENT "Launching ethernet_tui..."
+    USES_TERMINAL
+)

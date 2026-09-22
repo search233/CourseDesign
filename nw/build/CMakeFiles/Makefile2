@@ -84,6 +84,7 @@ preinstall: _deps/ftxui-build/preinstall
 clean: CMakeFiles/EthernetCore.dir/clean
 clean: CMakeFiles/ethernet_tui.dir/clean
 clean: CMakeFiles/test_runner.dir/clean
+clean: CMakeFiles/run.dir/clean
 clean: _deps/ftxui-build/clean
 .PHONY : clean
 
@@ -231,7 +232,7 @@ CMakeFiles/ethernet_tui.dir/clean:
 CMakeFiles/test_runner.dir/all: CMakeFiles/EthernetCore.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles --progress-num=80,81 "Built target test_runner"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles --progress-num=81,82 "Built target test_runner"
 .PHONY : CMakeFiles/test_runner.dir/all
 
 # Build rule for subdir invocation for target.
@@ -248,7 +249,7 @@ test_runner: CMakeFiles/test_runner.dir/rule
 # codegen rule for target.
 CMakeFiles/test_runner.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_runner.dir/build.make CMakeFiles/test_runner.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles --progress-num=80,81 "Finished codegen for target test_runner"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles --progress-num=81,82 "Finished codegen for target test_runner"
 .PHONY : CMakeFiles/test_runner.dir/codegen
 
 # clean rule for target.
@@ -257,13 +258,45 @@ CMakeFiles/test_runner.dir/clean:
 .PHONY : CMakeFiles/test_runner.dir/clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/run.dir
+
+# All Build rule for target.
+CMakeFiles/run.dir/all: CMakeFiles/ethernet_tui.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles --progress-num=73 "Built target run"
+.PHONY : CMakeFiles/run.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/run.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/yangz/Projects/CourseDesign/nw/build/CMakeFiles 80
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/run.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/yangz/Projects/CourseDesign/nw/build/CMakeFiles 0
+.PHONY : CMakeFiles/run.dir/rule
+
+# Convenience name for target.
+run: CMakeFiles/run.dir/rule
+.PHONY : run
+
+# codegen rule for target.
+CMakeFiles/run.dir/codegen: CMakeFiles/ethernet_tui.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles --progress-num=73 "Finished codegen for target run"
+.PHONY : CMakeFiles/run.dir/codegen
+
+# clean rule for target.
+CMakeFiles/run.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/clean
+.PHONY : CMakeFiles/run.dir/clean
+
+#=============================================================================
 # Target rules for target _deps/ftxui-build/CMakeFiles/screen.dir
 
 # All Build rule for target.
 _deps/ftxui-build/CMakeFiles/screen.dir/all:
 	$(MAKE) $(MAKESILENT) -f _deps/ftxui-build/CMakeFiles/screen.dir/build.make _deps/ftxui-build/CMakeFiles/screen.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/ftxui-build/CMakeFiles/screen.dir/build.make _deps/ftxui-build/CMakeFiles/screen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles --progress-num=73,74,75,76,77,78,79 "Built target screen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles --progress-num=74,75,76,77,78,79,80 "Built target screen"
 .PHONY : _deps/ftxui-build/CMakeFiles/screen.dir/all
 
 # Build rule for subdir invocation for target.
@@ -280,7 +313,7 @@ screen: _deps/ftxui-build/CMakeFiles/screen.dir/rule
 # codegen rule for target.
 _deps/ftxui-build/CMakeFiles/screen.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f _deps/ftxui-build/CMakeFiles/screen.dir/build.make _deps/ftxui-build/CMakeFiles/screen.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles --progress-num=73,74,75,76,77,78,79 "Finished codegen for target screen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles --progress-num=74,75,76,77,78,79,80 "Finished codegen for target screen"
 .PHONY : _deps/ftxui-build/CMakeFiles/screen.dir/codegen
 
 # clean rule for target.

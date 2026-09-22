@@ -9,6 +9,9 @@ uint8_t calculate_crc8(
     uint16_t poly) {
 
     trace.clear();
+    if (data.empty()) {
+        return 0;
+    }
 
     // 1. 数据展开为二进制串
     std::string bits = utils::bytes_to_bit_string(data);

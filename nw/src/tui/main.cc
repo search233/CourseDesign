@@ -87,7 +87,14 @@ int main() {
     });
 
     // 播放速度滑块：20ms ~ 600ms
-    Component slider_speed = Slider(" 延时: ", &speed_ms, 20, 600, 20);
+    SliderOption<int> slider_opt;
+    slider_opt.value = &speed_ms;
+    slider_opt.min = 20;
+    slider_opt.max = 600;
+    slider_opt.increment = 20;
+    slider_opt.color_active = Color::Cyan;
+    slider_opt.color_inactive = Color::GrayDark;
+    Component slider_speed = Slider(slider_opt);
 
     // 容器焦点树
     auto layout_container = Container::Vertical({
@@ -145,12 +152,12 @@ int main() {
                         switch (span.type) {
                             case FrameSegmentType::Preamble: byte_color = Color::Green; break;
                             case FrameSegmentType::SFD:      byte_color = Color::GreenLight; break;
-                            case FrameSegmentType::DestMac:  byte_color = Color::Blue; break;
+                            case FrameSegmentType::DestMac:  byte_color = Color::BlueLight; break;
                             case FrameSegmentType::SrcMac:   byte_color = Color::Cyan; break;
                             case FrameSegmentType::Length:   byte_color = Color::Yellow; break;
                             case FrameSegmentType::Payload:  byte_color = Color::White; break;
-                            case FrameSegmentType::Padding:  byte_color = Color::GrayDark; break;
-                            case FrameSegmentType::FCS:      byte_color = Color::Red; break;
+                            case FrameSegmentType::Padding:  byte_color = Color::GrayLight; break;
+                            case FrameSegmentType::FCS:      byte_color = Color::RedLight; break;
                         }
                         break;
                     }
@@ -169,40 +176,58 @@ int main() {
                 : text("请先执行封装...") | dim,
             filler(),
             separator(),
-            text("图例:") | bold,
-            text("[前导/SFD 绿]") | color(Color::Green),
-            text("[MAC 蓝/青]") | color(Color::Cyan),
-            text("[长度 黄] [数据 白]") | color(Color::Yellow),
-            text("[填充 灰] [FCS 红]") | color(Color::Red)
+            text("图例说明:") | bold | color(Color::White),
+            hbox({ text("■ 前导 ") | color(Color::Green),      text("■ SFD ") | color(Color::GreenLight) }),
+            hbox({ text("■ 目的MAC ") | color(Color::BlueLight), text("■ 源MAC ") | color(Color::Cyan) }),
+            hbox({ text("■ 长度 ") | color(Color::Yellow),     text("■ 数据 ") | color(Color::White) }),
+            hbox({ text("■ 填充 ") | color(Color::GrayLight),  text("■ FCS ") | color(Color::RedLight) })
         }) | border | size(WIDTH, EQUAL, 40); // 锁定紧凑宽度为 40 列
 
         // --- 模块 D: CRC 模 2 演算步进与播放控制器 ---
-        Element crc_detail = text("无运算数据") | dim;
+        Element crc_detail = text("请先执行封装以查看模 2 除法过程...") | dim;
         if (has_run && current_result.is_ok() && !current_result.crc_snaps.empty()) {
             const auto& snap = current_result.crc_snaps[current_step];
+            size_t crc_bytes = current_result.frame.destmac.size() + current_result.frame.srcmac.size() + 2 + current_result.frame.payload.size() + current_result.frame.padding.size();
             
             crc_detail = vbox({
-                text("生成多项式 G(X): 1 0 0 0 0 0 1 1 1 (CRC-8)") | color(Color::Yellow),
+                text("生成多项式 G(X): 1 0 0 0 0 0 1 1 1 (CRC-8 / 0x107)") | color(Color::Yellow) | bold,
+                text("校验范围 (IEEE 802.3): 目的MAC(6B) + 源MAC(6B) + 长度(2B) + 载荷(" + 
+                     std::to_string(current_result.frame.payload.size()) + "B) + 填充(" + 
+                     std::to_string(current_result.frame.padding.size()) + "B) = " + 
+                     std::to_string(crc_bytes) + "B (" + 
+                     std::to_string(crc_bytes * 8) + " 比特 / 共 " + 
+                     std::to_string(current_result.crc_snaps.size()) + " 步)") | color(Color::CyanLight),
                 separator(),
-                text("被除数切片:   " + snap.current_window) | bold,
+                hbox({ text("当前步数:     ") | dim, text("第 " + std::to_string(current_step + 1) + " 步 / 共 " + std::to_string(current_result.crc_snaps.size()) + " 步") | bold | color(Color::Cyan) }),
+                hbox({ text("被除数切片:     ") | dim, text(snap.current_window) | bold | color(Color::White) }),
                 snap.is_xor 
-                    ? text("多项式异或: ⊕ 100000111  (首位为1, 执行XOR)") | color(Color::Red)
-                    : text("直接左移:   - ---------  (首位为0, 仅移位)") | color(Color::GrayDark),
-                text("本步余数:     " + snap.remainder) | color(Color::Green),
-                text("下一位移入:   " + (snap.next_bit == '\0' ? std::string("(结束)") : std::string(1, snap.next_bit))) | dim
+                    ? hbox({ text("多项式运算:   ") | dim, text("⊕ 100000111  (首位为1, 执行模 2 异或 XOR)") | color(Color::RedLight) | bold })
+                    : hbox({ text("多项式运算:   ") | dim, text("- ---------  (首位为0, 仅直移不异或)") | color(Color::GrayLight) }),
+                hbox({ text("本步所得余数:   ") | dim, text(snap.remainder) | bold | color(Color::GreenLight) }),
+                hbox({ text("下一比特滑入: ") | dim, 
+                       (snap.next_bit == '\0' 
+                            ? text("无 (运算完毕)") | color(Color::Yellow) | bold 
+                            : text(std::string(1, snap.next_bit)) | bold | color(Color::White)) }),
+                separator(),
+                current_step + 1 == current_result.crc_snaps.size()
+                    ? hbox({ text("★ 模 2 除法演算完毕! 最终余数 (FCS): ") | bold | color(Color::GreenLight),
+                            text(snap.remainder.substr(1)) | bold | color(Color::Yellow),
+                            text(" (0x" + utils::byte_to_hex(static_cast<uint8_t>(current_result.frame.fcs & 0xFF)) + ")") | bold | color(Color::Yellow) })
+                    : hbox({ text("提示: 点击 [下一步] 或 [播放] 查看滑动除法过程") | dim })
             });
         }
 
         auto crc_control_bar = hbox({
             text(" 步数: " + (has_run && current_result.is_ok() ? 
-                std::to_string(current_step + 1) + "/" + std::to_string(current_result.crc_snaps.size()) : "0/0") + " ") | bold | ycenter,
+                std::to_string(current_step + 1) + "/" + std::to_string(current_result.crc_snaps.size()) : "0/0") + " ") | bold | color(Color::Cyan) | vcenter,
             btn_prev->Render(),
             btn_play->Render(),
             btn_next->Render(),
             btn_reset->Render(),
             separator(),
-            slider_speed->Render() | size(WIDTH, EQUAL, 18),
-            text(" " + std::to_string(speed_ms) + "ms ") | dim | ycenter
+            text(" ⏱ 播放延时: ") | bold | color(Color::Yellow) | vcenter,
+            slider_speed->Render() | size(WIDTH, EQUAL, 16) | vcenter,
+            text(" " + std::to_string(speed_ms) + " ms ") | bold | color(Color::Black) | bgcolor(Color::Yellow) | vcenter
         });
 
         auto crc_box = vbox({

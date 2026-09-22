@@ -1,6 +1,7 @@
 /home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/EthernetCore.dir
 /home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/ethernet_tui.dir
 /home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/test_runner.dir
+/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/run.dir
 /home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/package.dir
 /home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/package_source.dir
 /home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/edit_cache.dir
