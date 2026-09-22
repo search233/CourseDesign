@@ -29,7 +29,7 @@ Result encapsulate(
     }
 
     // 解析源 mac
-    if (utils::parse_mac(src_mac, res.frame.destmac) == false) {
+    if (utils::parse_mac(src_mac, res.frame.srcmac) == false) {
         set_status(ErrorCode::InvalidSrcMac);
         return res;
     }

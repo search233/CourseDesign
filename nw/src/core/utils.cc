@@ -7,38 +7,39 @@ bool utils::parse_mac (
     std::string_view mac_str,
     std::array<uint8_t, 6>& mac) {
 
-    bool tag = 1;
+    auto hex_to_int = [&](char c) -> int {
+        int res = -1;
 
-    int len = mac_str.length();
-    std::string clean_str;
-    for (int i = 0; i < len; ++i) {
-        char ch = mac_str[i];
+        if (c >= '0' && c <= '9') res = c - '0';
+        else if (c >= 'a' && c <= 'f') res = c - 'a' + 10;
+        else if (c >= 'A' && c <= 'F') res = c - 'A' + 10;
 
-        if (ch == '-' || ch == ':' || ch == ' ') {
-            if ((i + 1) % 3 == 0) continue;
-            else {
-                tag &= 0;
-                break;
-            }
-        }
+        return res;
+    };
 
-        if (!std::isxdigit(static_cast<unsigned char>(ch))) {
-            tag &= 0;
-            break;
-        }
+    if (mac_str.length() != 17) return false;
 
-        clean_str += ch;
-    }
-
-    if (clean_str.length() != 12) {
-        tag &= 0;
-    }
-
-    if (tag == 0) return false;
+    char del = 0;
 
     for (int i = 0; i < 6; ++i) {
-        int tmpnum = std::stoi(clean_str.substr(2 * i, 2), nullptr, 16);
-        mac[i] = static_cast<uint8_t>(tmpnum);
+
+        int idx = i * 3;
+        int hi = hex_to_int(mac_str[idx]);
+        int lo = hex_to_int(mac_str[idx + 1]);
+
+        if (hi == -1 || lo == -1) return false;
+
+        mac[i] = static_cast<uint8_t>((hi << 4) | lo);
+        
+        if (i < 5) {
+            char ch = mac_str[idx + 2];
+
+            if (ch != ':' && ch != '-') return false;
+
+            if (del == 0) del = ch;
+
+            if (del && del != ch) return false;
+        }
     }
 
     return true;
