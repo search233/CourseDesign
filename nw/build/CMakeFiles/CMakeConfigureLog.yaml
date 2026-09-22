@@ -1141,3 +1141,315 @@ events:
       Running the CXX compiler's linker: "/usr/bin/ld" "-v"
       GNU ld (GNU Binutils) 2.47
 ...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindGit.cmake:111 (find_program)"
+      - "/usr/share/cmake/Modules/FetchContent.cmake:1889 (find_package)"
+      - "/usr/share/cmake/Modules/FetchContent.cmake:1622 (__FetchContent_populateSubbuild)"
+      - "/usr/share/cmake/Modules/FetchContent.cmake:2160:EVAL:2 (__FetchContent_doPopulation)"
+      - "/usr/share/cmake/Modules/FetchContent.cmake:2160 (cmake_language)"
+      - "/usr/share/cmake/Modules/FetchContent.cmake:2401 (__FetchContent_Populate)"
+      - "CMakeLists.txt:29 (FetchContent_MakeAvailable)"
+    mode: "program"
+    variable: "GIT_EXECUTABLE"
+    description: "Git command line client"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "git"
+    candidate_directories:
+      - "/home/yangz/.local/bin/"
+      - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+    searched_directories:
+      - "/home/yangz/.local/bin/git"
+      - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/git"
+      - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/git"
+      - "/usr/local/bin/git"
+    found: "/usr/bin/git"
+    search_context:
+      ENV{PATH}:
+        - "/home/yangz/.local/bin"
+        - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
+        - "/home/yangz/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/local/sbin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:81 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCXXSourceCompiles.cmake:103 (cmake_check_source_compiles)"
+      - "/usr/share/cmake/Modules/FindThreads.cmake:162 (check_cxx_source_compiles)"
+      - "/usr/share/cmake/Modules/FindThreads.cmake:226 (_threads_check_libc)"
+      - "build/_deps/ftxui-src/CMakeLists.txt:147 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/CMakeScratch/TryCompile-ZbbVNW"
+      binary: "/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/CMakeScratch/TryCompile-ZbbVNW"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: '/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/CMakeScratch/TryCompile-ZbbVNW'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_a9326/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_a9326.dir/build.make CMakeFiles/cmTC_a9326.dir/build
+        make[1]: 进入目录“/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/CMakeScratch/TryCompile-ZbbVNW”
+        Building CXX object CMakeFiles/cmTC_a9326.dir/src.cxx.o
+        /usr/bin/c++ -DCMAKE_HAVE_LIBC_PTHREAD  -std=c++20 -o CMakeFiles/cmTC_a9326.dir/src.cxx.o -c /home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/CMakeScratch/TryCompile-ZbbVNW/src.cxx
+        Linking CXX executable cmTC_a9326
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a9326.dir/link.txt --verbose=1
+        /usr/bin/c++ CMakeFiles/cmTC_a9326.dir/src.cxx.o -o cmTC_a9326
+        make[1]: 离开目录“/home/yangz/Projects/CourseDesign/nw/build/CMakeFiles/CMakeScratch/TryCompile-ZbbVNW”
+        
+      exitCode: 0
+  -
+    kind: "find-v1"
+    backtrace:
+      - "build/_deps/ftxui-src/cmake/ftxui_set_options.cmake:1 (find_program)"
+      - "build/_deps/ftxui-src/CMakeLists.txt:153 (include)"
+    mode: "program"
+    variable: "CLANG_TIDY_EXE"
+    description: "Path to clang-tidy executable"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "clang-tidy"
+    candidate_directories:
+      - "/home/yangz/.local/bin/"
+      - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+    searched_directories:
+      - "/home/yangz/.local/bin/clang-tidy"
+      - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/clang-tidy"
+      - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/clang-tidy"
+      - "/usr/local/bin/clang-tidy"
+    found: "/usr/bin/clang-tidy"
+    search_context:
+      ENV{PATH}:
+        - "/home/yangz/.local/bin"
+        - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
+        - "/home/yangz/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/local/sbin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "build/_deps/ftxui-src/cmake/iwyu.cmake:1 (find_program)"
+      - "build/_deps/ftxui-src/CMakeLists.txt:166 (include)"
+    mode: "program"
+    variable: "iwyu_path"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "include-what-you-use"
+      - "iwyu"
+    candidate_directories:
+      - "/home/yangz/.local/bin/"
+      - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+    searched_directories:
+      - "/home/yangz/.local/bin/include-what-you-use"
+      - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/include-what-you-use"
+      - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/include-what-you-use"
+      - "/usr/local/bin/include-what-you-use"
+      - "/usr/bin/include-what-you-use"
+      - "/usr/local/sbin/include-what-you-use"
+      - "/usr/bin/site_perl/include-what-you-use"
+      - "/usr/bin/vendor_perl/include-what-you-use"
+      - "/usr/bin/core_perl/include-what-you-use"
+      - "/usr/local/bin/include-what-you-use"
+      - "/usr/local/sbin/include-what-you-use"
+      - "/usr/local/include-what-you-use"
+      - "/usr/bin/include-what-you-use"
+      - "/usr/sbin/include-what-you-use"
+      - "/usr/include-what-you-use"
+      - "/bin/include-what-you-use"
+      - "/sbin/include-what-you-use"
+      - "/usr/X11R6/bin/include-what-you-use"
+      - "/usr/X11R6/sbin/include-what-you-use"
+      - "/usr/X11R6/include-what-you-use"
+      - "/usr/pkg/bin/include-what-you-use"
+      - "/usr/pkg/sbin/include-what-you-use"
+      - "/usr/pkg/include-what-you-use"
+      - "/opt/bin/include-what-you-use"
+      - "/opt/sbin/include-what-you-use"
+      - "/opt/include-what-you-use"
+      - "/home/yangz/.local/bin/iwyu"
+      - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/iwyu"
+      - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/iwyu"
+      - "/usr/local/bin/iwyu"
+      - "/usr/bin/iwyu"
+      - "/usr/local/sbin/iwyu"
+      - "/usr/bin/site_perl/iwyu"
+      - "/usr/bin/vendor_perl/iwyu"
+      - "/usr/bin/core_perl/iwyu"
+      - "/usr/local/bin/iwyu"
+      - "/usr/local/sbin/iwyu"
+      - "/usr/local/iwyu"
+      - "/usr/bin/iwyu"
+      - "/usr/sbin/iwyu"
+      - "/usr/iwyu"
+      - "/bin/iwyu"
+      - "/sbin/iwyu"
+      - "/usr/X11R6/bin/iwyu"
+      - "/usr/X11R6/sbin/iwyu"
+      - "/usr/X11R6/iwyu"
+      - "/usr/pkg/bin/iwyu"
+      - "/usr/pkg/sbin/iwyu"
+      - "/usr/pkg/iwyu"
+      - "/opt/bin/iwyu"
+      - "/opt/sbin/iwyu"
+      - "/opt/iwyu"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/home/yangz/.local/bin"
+        - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/yangz/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
+        - "/home/yangz/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/local/sbin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+...

@@ -1,7 +1,10 @@
 {
 	"InstallScripts" : 
 	[
-		"/home/yangz/Projects/CourseDesign/nw/build/cmake_install.cmake"
+		"/home/yangz/Projects/CourseDesign/nw/build/cmake_install.cmake",
+		"/home/yangz/Projects/CourseDesign/nw/build/_deps/ftxui-build/cmake_install.cmake",
+		"/home/yangz/Projects/CourseDesign/nw/build/_deps/ftxui-build/examples/cmake_install.cmake",
+		"/home/yangz/Projects/CourseDesign/nw/build/_deps/ftxui-build/doc/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

@@ -20,6 +20,22 @@ add_library(EthernetCore STATIC
     ${SOURCE_DIR}/core/frame_builder.cc
 )
 
+include(FetchContent)
+FetchContent_Declare(
+  ftxui
+  GIT_REPOSITORY https://github.com/ArthurSonzogni/ftxui
+  GIT_TAG v5.0.0
+)
+FetchContent_MakeAvailable(ftxui)
+
+add_executable(ethernet_tui src/tui/main.cc)
+target_link_libraries(ethernet_tui PRIVATE 
+    EthernetCore
+    ftxui::screen
+    ftxui::dom
+    ftxui::component
+)
+
 add_executable(test_runner 
     ${CMAKE_CURRENT_SOURCE_DIR}/test/test_runner.cc
 )
