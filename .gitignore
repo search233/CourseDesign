@@ -1,0 +1,17 @@
+# Build directories
+build/
+cmake-build-*/
+*.o
+*.a
+*.so
+
+# Language server & Compilation database
+compile_commands.json
+.cache/
+
+# IDE / Editors
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
