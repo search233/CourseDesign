@@ -453,13 +453,10 @@ int main() {
                 rem_bits.push_back(snap.remainder[r]);
                 rem_bits.push_back(' ');
             }
-            row5_elements.push_back(text(rem_bits) | bold | color(Color::GreenLight));
-
-            if (snap.next_bit != '\0') {
-                row5_elements.push_back(text("← 读入 '" + std::string(1, snap.next_bit) + "'") | bold | color(Color::Yellow));
-            } else {
-                row5_elements.push_back(text("★ 演算完毕") | bold | color(Color::GreenLight));
+            if (!rem_bits.empty()) {
+                rem_bits.pop_back();
             }
+            row5_elements.push_back(text(rem_bits) | bold | color(Color::GreenLight));
             auto row5 = hbox({
                 text(" 本步余数 ") | color(Color::GreenLight) | size(WIDTH, EQUAL, 12),
                 separator(),
