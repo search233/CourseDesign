@@ -45,16 +45,9 @@ bool utils::parse_mac (
     return true;
 }
 
-std::string utils::byte_to_hex (uint8_t byte) {
-    std::ostringstream oss;
-
-    oss << std::hex 
-        << std::uppercase 
-        << std::setfill('0') 
-        << std::setw(2)
-        << static_cast<int>(byte);
-
-    return oss.str();
+std::string utils::byte_to_hex(uint8_t byte) {
+    static constexpr char hex_chars[] = "0123456789ABCDEF";
+    return std::string{hex_chars[(byte >> 4) & 0x0F], hex_chars[byte & 0x0F]};
 }
 
 
